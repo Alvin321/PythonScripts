@@ -1,0 +1,33 @@
+from gpiozero import Button
+from time import sleep
+import pygame
+
+switch_1 = Button(21,pull_up=True)
+switch_2 = Button(20,pull_up=True)
+
+def playmusic(soundfile):
+		pygame.mixer.init()
+		#clock = pygame.time.Clock()
+		pygame.mixer.music.load(soundfile)
+		pygame.mixer.music.play()
+		print("..As llamado la funcion Playmusic..")
+		#if pygame.mixer.music.get_busy():
+        #clock.tick()
+
+def stopmusic():
+    """stop currently playing music"""
+    pygame.mixer.music.stop()
+
+sound_01 = "e-mail.mp3"
+sound_02 = "Doorbell.mp3"
+sound_06 = "Store-Door-Chime.mp3"
+sound_07 = "Door-buzzer.mp3"
+sound_08 = "Elevator-bell.mp3"
+sound_13 = "apple-sms.mp3"
+sound_15 = "Electronic-Chime.mp3"
+
+while True:
+	switch_1.wait_for_press(timeout=None)
+	playmusic(sound_06)
+	switch_1.wait_for_release(timeout=None)
+	print("fin de switch 1")
