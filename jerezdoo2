@@ -1,0 +1,58 @@
+6from gpiozero import Button
+from io import open
+from time import sleep
+import datetime
+import pygame
+
+switch_1 = Button(21)
+switch_2 = Button(20)
+
+       
+def playmusic(soundfile):
+    """Stream music with mixer.music module in blocking manner.
+       This will stream the sound from disk while playing.
+    """
+    pygame.mixer.init()
+    #clock = pygame.time.Clock()
+    pygame.mixer.music.load(soundfile)
+    pygame.mixer.music.play()
+    print("tocando")
+    #if pygame.mixer.music.get_busy():
+        #clock.tick()
+     
+def stopmusic():
+    """stop currently playing music"""
+    pygame.mixer.music.stop()
+    
+
+def Fecha():
+    dt = datetime.datetime.now()
+    print(dt)
+    
+	
+	
+def Registros():                
+	ms1 = "La ultima actividad detectada en Door_1 "
+	fichero = open("registros.txt", "w")
+	fichero.write(ms1)
+	#ms2 = "La ultima actividad detectada en Door_2 "
+	#folder = open("door_alarm.txt", "a")
+	#time = Fecha()
+	#folder.write(ms1)
+	#fichero.close
+	
+sound_01 = "e-mail.mp3"
+sound_02 = "Doorbell.mp3"
+sound_06 = "Store-Door-Chime.mp3"
+sound_07 = "Door-buzzer.mp3"
+sound_08 = "Elevator-bell.mp3"
+sound_13 = "apple-sms.mp3"
+sound_15 = "Electronic-Chime.mp3"	
+
+while True:
+	switch_2.when_pressed = Registros
+	switch_2.wait_for_press(timeout=None)
+	playmusic(sound_02)
+	switch_2.wait_for_release(timeout=None)
+	print("fin de switch 2")
+	    
